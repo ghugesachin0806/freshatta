@@ -15,7 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GrainService {
@@ -95,7 +98,7 @@ public class GrainService {
 
         grainEntity.setGrainName(grainDTO.getGrainName() != null ? grainDTO.getGrainName() : grainEntity.getGrainName());
         grainEntity.setGrainDesc(grainDTO.getGrainDesc() != null ? grainDTO.getGrainDesc() : grainEntity.getGrainDesc());
-        grainEntity.setAvailable(grainDTO.getAvailable() != null? grainDTO.getAvailable() : grainEntity.isAvailable());
+        grainEntity.setAvailable(grainDTO.getAvailable() != null ? grainDTO.getAvailable() : grainEntity.isAvailable());
         grainEntity.setActualPrice(grainDTO.getActualPrice() != null ? grainDTO.getActualPrice() : grainEntity.getActualPrice());
 
         if (grainDTO.getNutrientContent() != null) {
@@ -114,5 +117,15 @@ public class GrainService {
         grainRepository.findById(grainId)
                 .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Grain not found with id: " + grainId));
         grainRepository.deleteById(grainId);
+    }
+
+    // get all grain List
+    public List<String> getAllNutrientList() {
+        List<String> fieldNames = Arrays.stream(NutrientContentEntity.class.getDeclaredFields())
+                .map(Field::getName)
+                .filter(name -> !name.equals("id"))
+                .collect(Collectors.toList());
+
+        return fieldNames;
     }
 }

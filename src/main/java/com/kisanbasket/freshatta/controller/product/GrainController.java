@@ -67,4 +67,10 @@ public class GrainController {
         grainService.deletegrain(grainId);
         return ResponseEntity.ok(Map.of("message", "Grain deleted successfully."));
     }
+
+    @GetMapping("/nutrients")
+    public ResponseEntity<?> getAllNutrientList() {
+        List<String> getFielnames = grainService.getAllNutrientList();
+        return ResponseEntity.ok(getFielnames);
+    }
 }
