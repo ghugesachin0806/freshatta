@@ -39,6 +39,6 @@ public class GrainComboEntity {
     @OneToMany(mappedBy = "grainComboEntity", cascade = CascadeType.ALL)
     private List<ProductVariantEntity> productVariantEntityList = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private CustomVariantEntity customVariantEntity;
+    @OneToMany(mappedBy = "grainComboEntity", cascade = CascadeType.ALL)
+    private List<CustomVariantEntity> customVariantEntityList;
 }

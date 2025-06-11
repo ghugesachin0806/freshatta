@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomVariantservice {
@@ -42,6 +43,12 @@ public class CustomVariantservice {
 
         ProductVariantEntity productVariantEntity = productVariantRepository.findById(customVariantDTO.getProductVariantId())
                 .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "ProductVariant not found with id: " + customVariantDTO.getProductVariantId()));
+
+        Optional<CustomVariantEntity> customVariantEntityOptional = customVariantRepository.findByGrainComboEntityIdAndProductVariantEntityId(customVariantDTO.getGrainComboId(), customVariantDTO.getProductVariantId());
+
+        if (customVariantEntityOptional.isPresent()) {
+            throw new CustomException(HttpStatus.CONFLICT, "CustomVariant already exists for the given GrainCombo and ProductVariant.");
+        }
 
         customVariantEntity.setGrainComboEntity(grainComboEntity);
         customVariantEntity.setProductVariantEntity(productVariantEntity);
