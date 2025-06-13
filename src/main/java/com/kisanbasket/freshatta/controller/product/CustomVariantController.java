@@ -20,8 +20,8 @@ public class CustomVariantController {
 
     @PostMapping
     public ResponseEntity<?> createCustomVariant(@RequestBody CustomVariantDTO customVariantDTO) {
-        CustomVariantDTO customVariantDTO1 = customVariantservice.createCustomVariant(customVariantDTO);
-        return ResponseEntity.ok(customVariantDTO1);
+        CustomVariantDTO newCustomVariantDTO = customVariantservice.createCustomVariant(customVariantDTO);
+        return ResponseEntity.ok(newCustomVariantDTO);
     }
 
     @GetMapping("/{customVariantId}")

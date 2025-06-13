@@ -19,4 +19,5 @@ public class GrainDTO {
     private BigDecimal actualPrice;
     private NutrientContentDTO nutrientContent;
     private List<GrainComboDTO> grainComboList;
+
 }
