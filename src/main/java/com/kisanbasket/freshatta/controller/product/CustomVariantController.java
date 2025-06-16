@@ -1,6 +1,6 @@
 package com.kisanbasket.freshatta.controller.product;
 
-import com.kisanbasket.freshatta.DTO.CustomVariantDTO;
+import com.kisanbasket.freshatta.DTO.product.CustomVariantDTO;
 import com.kisanbasket.freshatta.service.product.CustomVariantservice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

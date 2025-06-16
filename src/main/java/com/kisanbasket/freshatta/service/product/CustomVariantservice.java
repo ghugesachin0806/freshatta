@@ -1,7 +1,7 @@
 package com.kisanbasket.freshatta.service.product;
 
 
-import com.kisanbasket.freshatta.DTO.CustomVariantDTO;
+import com.kisanbasket.freshatta.DTO.product.CustomVariantDTO;
 import com.kisanbasket.freshatta.entity.product.CustomVariantEntity;
 import com.kisanbasket.freshatta.entity.product.GrainComboEntity;
 import com.kisanbasket.freshatta.entity.product.ProductVariantEntity;
@@ -15,11 +15,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CustomVariantservice {
 
     private final ModelMapper modelMapper;

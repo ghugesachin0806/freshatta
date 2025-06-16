@@ -2,7 +2,7 @@ package com.kisanbasket.freshatta.controller.product;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kisanbasket.freshatta.DTO.GrainDTO;
+import com.kisanbasket.freshatta.DTO.product.GrainDTO;
 import com.kisanbasket.freshatta.service.product.GrainService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

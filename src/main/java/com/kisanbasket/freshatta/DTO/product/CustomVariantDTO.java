@@ -1,4 +1,4 @@
-package com.kisanbasket.freshatta.DTO;
+package com.kisanbasket.freshatta.DTO.product;
 
 
 import lombok.AllArgsConstructor;

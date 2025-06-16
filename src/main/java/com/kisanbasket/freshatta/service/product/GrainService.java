@@ -1,7 +1,7 @@
 package com.kisanbasket.freshatta.service.product;
 
 
-import com.kisanbasket.freshatta.DTO.GrainDTO;
+import com.kisanbasket.freshatta.DTO.product.GrainDTO;
 import com.kisanbasket.freshatta.entity.product.GrainEntity;
 import com.kisanbasket.freshatta.entity.product.NutrientContentEntity;
 import com.kisanbasket.freshatta.exception.CustomException;
@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class GrainService {
 
     private final ModelMapper modelMapper;

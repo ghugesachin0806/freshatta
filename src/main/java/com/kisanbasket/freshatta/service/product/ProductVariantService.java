@@ -1,6 +1,6 @@
 package com.kisanbasket.freshatta.service.product;
 
-import com.kisanbasket.freshatta.DTO.ProductVariantDTO;
+import com.kisanbasket.freshatta.DTO.product.ProductVariantDTO;
 import com.kisanbasket.freshatta.entity.product.GrainComboEntity;
 import com.kisanbasket.freshatta.entity.product.ProductEntity;
 import com.kisanbasket.freshatta.entity.product.ProductVariantEntity;
@@ -14,10 +14,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductVariantService {
 
     private final ProductVariantRepository productVariantRepository;

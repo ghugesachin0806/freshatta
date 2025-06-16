@@ -1,7 +1,7 @@
 package com.kisanbasket.freshatta.service.product;
 
 
-import com.kisanbasket.freshatta.DTO.GrainComboDTO;
+import com.kisanbasket.freshatta.DTO.product.GrainComboDTO;
 import com.kisanbasket.freshatta.entity.product.GrainComboEntity;
 import com.kisanbasket.freshatta.entity.product.GrainEntity;
 import com.kisanbasket.freshatta.entity.product.NutrientContentEntity;
@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
+@Transactional
 public class GrainComboService {
 
     private final GrainComboRepository grainComboRepository;

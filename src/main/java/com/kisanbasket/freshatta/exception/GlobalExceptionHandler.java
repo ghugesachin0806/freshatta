@@ -4,6 +4,7 @@ package com.kisanbasket.freshatta.exception;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,8 +27,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(JsonProcessingException.class)
-    public ResponseEntity<?> jsonProcessingExceptionHandler(JsonProcessingException e)
-    {
+    public ResponseEntity<?> jsonProcessingExceptionHandler(JsonProcessingException e) {
         ErrorResponse errorResponse = ErrorResponse.builder().
                 status(HttpStatus.BAD_REQUEST)
                 .message("Invalid input format")
@@ -38,8 +38,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> methodArgumentValidationHandler(MethodArgumentNotValidException e)
-    {
+    public ResponseEntity<?> methodArgumentValidationHandler(MethodArgumentNotValidException e) {
         ErrorResponse errorResponse = ErrorResponse.builder().
                 status(HttpStatus.BAD_REQUEST)
                 .message("Validation failed")
@@ -51,8 +50,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleException(Exception e)
-    {
+    public ResponseEntity<?> handleException(Exception e) {
         ErrorResponse errorResponse = ErrorResponse.builder().
                 status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .message("An unexpected error occurred")
@@ -62,14 +60,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity<ErrorResponse> handleIOException(IOException e) {
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .status(HttpStatus.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                .message("Failed to process the image file: " + e.getMessage())
+                .status(HttpStatus.NOT_FOUND)
+                .message(e.getMessage())
                 .timestamp(new Date())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 }

@@ -1,8 +1,8 @@
 package com.kisanbasket.freshatta.controller.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kisanbasket.freshatta.DTO.ImageDTO;
-import com.kisanbasket.freshatta.DTO.ProductDTO;
+import com.kisanbasket.freshatta.DTO.product.ImageDTO;
+import com.kisanbasket.freshatta.DTO.product.ProductDTO;
 import com.kisanbasket.freshatta.service.product.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

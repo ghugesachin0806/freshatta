@@ -1,7 +1,6 @@
 package com.kisanbasket.freshatta.controller.product;
 
-import com.kisanbasket.freshatta.DTO.ProductVariantDTO;
-import com.kisanbasket.freshatta.entity.product.ProductVariantEntity;
+import com.kisanbasket.freshatta.DTO.product.ProductVariantDTO;
 import com.kisanbasket.freshatta.service.product.ProductVariantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

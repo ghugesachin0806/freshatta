@@ -1,23 +1,21 @@
-package com.kisanbasket.freshatta.DTO;
+package com.kisanbasket.freshatta.DTO.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GrainDTO {
-
+public class GrainComboDTO {
     private Long id;
-    private String grainName;
-    private String grainDesc;
-    private Boolean available;
+    private Long grainId;
+    private String name;
+    private BigDecimal weight;
     private BigDecimal actualPrice;
+    private BigDecimal sellingPrice;
+    private BigDecimal discountedPrice;
     private NutrientContentDTO nutrientContent;
-    private List<GrainComboDTO> grainComboList;
-
 }

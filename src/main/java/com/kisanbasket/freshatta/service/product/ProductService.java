@@ -1,7 +1,7 @@
 package com.kisanbasket.freshatta.service.product;
 
-import com.kisanbasket.freshatta.DTO.ImageDTO;
-import com.kisanbasket.freshatta.DTO.ProductDTO;
+import com.kisanbasket.freshatta.DTO.product.ImageDTO;
+import com.kisanbasket.freshatta.DTO.product.ProductDTO;
 import com.kisanbasket.freshatta.entity.product.ImageEntity;
 import com.kisanbasket.freshatta.entity.product.ProductEntity;
 import com.kisanbasket.freshatta.exception.CustomException;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductService {
 
     private final ProductRepository productRepository;
