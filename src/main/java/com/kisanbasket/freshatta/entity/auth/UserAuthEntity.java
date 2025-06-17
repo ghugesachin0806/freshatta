@@ -27,7 +27,6 @@ public class UserAuthEntity implements UserDetails {
 
     private String fullName;
 
-    @Column(unique = true)
     private String email;
 
     @Column(unique = true, nullable = false)
@@ -35,7 +34,7 @@ public class UserAuthEntity implements UserDetails {
 
     private String password;
 
-    @OneToMany(mappedBy = "userAuthEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userAuthEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<UserRole> userRoleList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userAuthEntity", cascade = CascadeType.ALL, orphanRemoval = true)

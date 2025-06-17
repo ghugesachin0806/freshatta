@@ -51,7 +51,7 @@ public class JWTUtil {
         Cookie cookie = new Cookie("refreshToken", token);
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
-        cookie.setPath("/refresh-token");
+        cookie.setPath("/auth/refresh-token");
         cookie.setMaxAge((int) expiryDays * 24 * 60 * 60);
 
         return cookie;

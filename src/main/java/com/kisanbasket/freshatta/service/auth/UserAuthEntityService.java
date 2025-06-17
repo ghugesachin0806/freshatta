@@ -1,9 +1,13 @@
 package com.kisanbasket.freshatta.service.auth;
 
 import com.kisanbasket.freshatta.DTO.auth.UserDTO;
+import com.kisanbasket.freshatta.entity.auth.Address;
 import com.kisanbasket.freshatta.entity.auth.UserAuthEntity;
+import com.kisanbasket.freshatta.entity.auth.UserRole;
 import com.kisanbasket.freshatta.exception.CustomException;
+import com.kisanbasket.freshatta.repository.auth.AddressRepository;
 import com.kisanbasket.freshatta.repository.auth.UserAuthRepository;
+import com.kisanbasket.freshatta.repository.auth.UserRoleRepository;
 import com.kisanbasket.freshatta.utils.JWTUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,6 +34,8 @@ public class UserAuthEntityService implements UserDetailsService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final JWTUtil jwtUtil;
+    private final AddressRepository addressRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @Value("${spring.login.otp.resend}")
     private int resendOtpValidity;
@@ -37,11 +43,13 @@ public class UserAuthEntityService implements UserDetailsService {
     @Value("${spring.login.otp.verifytime}")
     private int verifytimeOTP;
 
-    public UserAuthEntityService(UserAuthRepository userAuthRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, JWTUtil jwtUtil) {
+    public UserAuthEntityService(UserAuthRepository userAuthRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, JWTUtil jwtUtil, AddressRepository addressRepository, UserRoleRepository userRoleRepository) {
         this.userAuthRepository = userAuthRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
+        this.addressRepository = addressRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Override
@@ -135,6 +143,21 @@ public class UserAuthEntityService implements UserDetailsService {
         userAuthEntity.setIsVerified(false);
 
         UserAuthEntity updatedUserAuthEntity = userAuthRepository.save(userAuthEntity);
+
+        if (updatedUserAuthEntity.getUserRoleList() != null) {
+            for (Address address : updatedUserAuthEntity.getAddressList()) {
+                address.setUserAuthEntity(updatedUserAuthEntity);
+                addressRepository.save(address);
+            }
+        }
+
+        if (updatedUserAuthEntity.getUserRoleList() != null) {
+            for (UserRole userRole : updatedUserAuthEntity.getUserRoleList()) {
+                userRole.setUserAuthEntity(userAuthEntity);
+                userRoleRepository.save(userRole);
+            }
+        }
+
         UserDTO updatedUserDTO = modelMapper.map(updatedUserAuthEntity, UserDTO.class);
         return updatedUserDTO;
     }

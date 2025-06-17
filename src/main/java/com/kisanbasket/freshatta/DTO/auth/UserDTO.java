@@ -13,13 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-    private Long id;
     private String fullName;
     private String email;
     private String mobileNumber;
     private String password;
-    private List<UserRole> userRoleList = new ArrayList<>();
-    private List<Address> addressList = new ArrayList<>();
+    private List<UserRoleDTO> userRoleList = new ArrayList<>();
+    private List<AddressDTO> addressList = new ArrayList<>();
     private Boolean isVerified;
     private String loginOtp;
 }
