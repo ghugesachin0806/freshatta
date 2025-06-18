@@ -4,6 +4,7 @@ package com.kisanbasket.freshatta.controller.product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kisanbasket.freshatta.DTO.product.GrainDTO;
 import com.kisanbasket.freshatta.service.product.GrainService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class GrainController {
 
     // create grain
     @PostMapping
-    public ResponseEntity<?> createGrain(@RequestBody GrainDTO grainDTO) {
+    public ResponseEntity<?> createGrain(@Valid @RequestBody GrainDTO grainDTO) {
 
         GrainDTO grainDTO1 = grainService.createGrain(grainDTO);
         return ResponseEntity.status(HttpStatus.CREATED)

@@ -2,6 +2,7 @@ package com.kisanbasket.freshatta.controller.product;
 
 import com.kisanbasket.freshatta.DTO.product.ProductVariantDTO;
 import com.kisanbasket.freshatta.service.product.ProductVariantService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ProductVariantController {
 
     // create
     @PostMapping
-    public ResponseEntity<?> createProductVariant(@RequestBody ProductVariantDTO productVariantDTO) {
+    public ResponseEntity<?> createProductVariant(@Valid @RequestBody ProductVariantDTO productVariantDTO) {
         ProductVariantDTO productVariantDTO1 = productVariantService.createProductVariant(productVariantDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(productVariantDTO1);
     }

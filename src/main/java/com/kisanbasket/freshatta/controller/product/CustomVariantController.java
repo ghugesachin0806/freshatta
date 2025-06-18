@@ -2,6 +2,7 @@ package com.kisanbasket.freshatta.controller.product;
 
 import com.kisanbasket.freshatta.DTO.product.CustomVariantDTO;
 import com.kisanbasket.freshatta.service.product.CustomVariantservice;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class CustomVariantController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createCustomVariant(@RequestBody CustomVariantDTO customVariantDTO) {
+    public ResponseEntity<?> createCustomVariant(@Valid @RequestBody CustomVariantDTO customVariantDTO) {
         CustomVariantDTO newCustomVariantDTO = customVariantservice.createCustomVariant(customVariantDTO);
         return ResponseEntity.ok(newCustomVariantDTO);
     }

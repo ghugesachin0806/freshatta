@@ -46,6 +46,12 @@ public class ProductVariantService {
                 .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Product not found with id: " + productVariantDTO.getProductId()));
         productVariantEntity.setProductEntity(productEntity);
 
+        if (productVariantRepository.findByNameAndProductEntityId(
+                productVariantDTO.getName(), productVariantDTO.getProductId()).isPresent()) {
+            throw new CustomException(HttpStatus.CONFLICT,
+                    "A product variant with name '" + productVariantDTO.getName() + "' already exists for the given product.");
+        }
+
         ProductVariantEntity productVariantEntity1 = productVariantRepository.save(productVariantEntity);
         ProductVariantDTO productVariantDTO1 = modelMapper.map(productVariantEntity1, ProductVariantDTO.class);
         return productVariantDTO1;

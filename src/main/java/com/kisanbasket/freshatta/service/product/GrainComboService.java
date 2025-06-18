@@ -45,6 +45,11 @@ public class GrainComboService {
         GrainEntity grainEntity = grainRepository.findById(grainComboDTO.getGrainId())
                 .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Grain not found with id: " + grainComboDTO.getGrainId()));
 
+        if (grainComboRepository.findByNameAndGrainEntityId(grainComboDTO.getName(), grainComboDTO.getGrainId()).isPresent()) {
+            throw new CustomException(HttpStatus.CONFLICT,
+                    "Grain combo with name '" + grainComboDTO.getName() + "' already exists for the given grain.");
+        }
+
         NutrientContentEntity nutrientContentEntity = grainEntity.getNutrientContent();
         NutrientContentEntity copyNutrientContentEntity = nutrientContentEntity.toBuilder().id(null).build();
 
@@ -130,7 +135,7 @@ public class GrainComboService {
             NutrientContentEntity nutrientContentEntity = nutrientContentRepository.findById(grainComboEntity.getGrainEntity().getNutrientContent().getId())
                     .orElseThrow(() -> new CustomException(HttpStatus.NOT_FOUND, "Grain not found with id: " + grainComboEntity.getGrainEntity().getId()));
 
-            NutrientContentEntity copyNutrientContentEntity =  nutrientContentEntity.toBuilder().id(null).build();
+            NutrientContentEntity copyNutrientContentEntity = nutrientContentEntity.toBuilder().id(null).build();
 
             BigDecimal ratio = grainComboDTO.getWeight().divide(BigDecimal.valueOf(100));
 

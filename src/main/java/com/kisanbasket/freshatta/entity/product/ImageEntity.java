@@ -19,7 +19,7 @@ public class ImageEntity {
 
     @Column(nullable = false)
     @org.hibernate.annotations.ColumnDefault("false")
-    private boolean hasImage = false;
+    private Boolean hasImage = false;
 
     @Lob
     @JdbcTypeCode(SqlTypes.BINARY)

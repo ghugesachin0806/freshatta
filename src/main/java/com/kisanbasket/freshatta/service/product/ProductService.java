@@ -2,12 +2,15 @@ package com.kisanbasket.freshatta.service.product;
 
 import com.kisanbasket.freshatta.DTO.product.ImageDTO;
 import com.kisanbasket.freshatta.DTO.product.ProductDTO;
+import com.kisanbasket.freshatta.entity.product.CustomVariantEntity;
 import com.kisanbasket.freshatta.entity.product.ImageEntity;
 import com.kisanbasket.freshatta.entity.product.ProductEntity;
+import com.kisanbasket.freshatta.entity.product.ProductVariantEntity;
 import com.kisanbasket.freshatta.exception.CustomException;
 import com.kisanbasket.freshatta.repository.product.ImageRepository;
 import com.kisanbasket.freshatta.repository.product.ProductRepository;
 import com.kisanbasket.freshatta.utils.ImageUtil;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +28,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Validated
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -42,7 +47,7 @@ public class ProductService {
     }
 
     // create
-    public ProductDTO createProduct(ProductDTO productDTO, MultipartFile[] images) throws IOException {
+    public ProductDTO createProduct(@Valid ProductDTO productDTO, MultipartFile[] images) throws IOException {
 
         imageUtil.imageListValidation(images);
 
@@ -90,6 +95,7 @@ public class ProductService {
     public List<ProductDTO> getAllProduct() {
 
         List<ProductEntity> productEntityList = productRepository.findAll();
+
         return productEntityList.stream()
                 .map(productEntity -> {
                     ProductDTO productDTO = modelMapper.map(productEntity, ProductDTO.class);

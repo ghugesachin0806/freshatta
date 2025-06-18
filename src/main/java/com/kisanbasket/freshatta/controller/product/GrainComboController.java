@@ -3,6 +3,7 @@ package com.kisanbasket.freshatta.controller.product;
 
 import com.kisanbasket.freshatta.DTO.product.GrainComboDTO;
 import com.kisanbasket.freshatta.service.product.GrainComboService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class GrainComboController {
 
     // create
     @PostMapping
-    public ResponseEntity<?> createGrainCombo(@RequestBody GrainComboDTO grainComboDTO) {
+    public ResponseEntity<?> createGrainCombo(@Valid @RequestBody GrainComboDTO grainComboDTO) {
         GrainComboDTO grainComboDTO1 = grainComboService.createGrainCombo(grainComboDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(grainComboDTO1);
     }

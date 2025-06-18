@@ -99,7 +99,7 @@ public class GrainService {
 
         grainEntity.setGrainName(grainDTO.getGrainName() != null ? grainDTO.getGrainName() : grainEntity.getGrainName());
         grainEntity.setGrainDesc(grainDTO.getGrainDesc() != null ? grainDTO.getGrainDesc() : grainEntity.getGrainDesc());
-        grainEntity.setAvailable(grainDTO.getAvailable() != null ? grainDTO.getAvailable() : grainEntity.isAvailable());
+        grainEntity.setAvailable(grainDTO.getAvailable() != null ? grainDTO.getAvailable() : grainEntity.getAvailable());
         grainEntity.setActualPrice(grainDTO.getActualPrice() != null ? grainDTO.getActualPrice() : grainEntity.getActualPrice());
 
         if (grainDTO.getNutrientContent() != null) {

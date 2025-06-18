@@ -21,17 +21,20 @@ public class GrainEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String grainName;
+
     private String grainDesc;
 
-    private boolean available;
+    @Column(nullable = false)
+    private Boolean available;
 
     private BigDecimal actualPrice;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn
     private NutrientContentEntity nutrientContent;
 
-    @OneToMany(mappedBy = "grainEntity", cascade = CascadeType.ALL)
-    private List<GrainComboEntity> grainComboList= new ArrayList<>();
+    @OneToMany(mappedBy = "grainEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GrainComboEntity> grainComboList = new ArrayList<>();
 }

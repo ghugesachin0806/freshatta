@@ -1,26 +1,25 @@
 package com.kisanbasket.freshatta.entity.product;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table(name = "Custom-Variants")
+@Table(name = "Carousel-images")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomVariantEntity {
+public class CarouselEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn
-    private GrainComboEntity grainComboEntity;
+    @Column(nullable = false)
+    private Long orderId;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn
-    private ProductVariantEntity productVariantEntity;
+    private ImageEntity imageEntity;
 }

@@ -60,7 +60,7 @@ public class SecurityConfig {
         JWTRefreshFilter jwtRefreshFilter = new JWTRefreshFilter(authenticationManager(), jwtUtil);
 
         return httpSecurity.authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/auth/register", "auth/generate-otp", "auth/verify-otp")
+                        auth.requestMatchers("/auth/register", "/auth/generate-otp", "/auth/verify-otp", "/home-page/**","/admin/carousel/image/**")
                                 .permitAll()
                                 .requestMatchers("/admin/**").hasRole(UserType.ADMIN.toString())
                                 .anyRequest()
